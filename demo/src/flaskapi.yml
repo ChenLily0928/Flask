@@ -1,0 +1,74 @@
+swagger: "2.0"
+info:
+  description: "Demo"
+  version: "1.0.2"
+  title: "FlaskAPI"
+  termsOfService: ""
+tags:
+  - name: "user"
+    description: "APIs "
+schemes:
+- "https"
+- "http"
+paths:
+  "/api/v1/users":
+    get:
+      tags:
+        - "user"
+      summary: "Get All User List"
+      description: ""
+      operationId: "getUser"
+      produces: 
+       - "application/json"
+      responses:
+        500:
+          description: Internal Server Error.
+        200:
+          description: Retrieve users list
+          schema:     
+            properties:
+              id:
+                type: integer
+                description: serial
+              Name:
+                type: string
+                description: 名字
+              Age:
+                type: integer
+                description: 年齡
+    post:
+      tags:
+        - "user"
+      summary: "Create user"
+      description: ""
+      operationId: "createUser"
+      produces:
+      - "application/json"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            required:
+              - Name
+              - Age
+            properties:
+              Name:
+                type: string
+                description: 名字
+              Age:
+                type: integer
+                description: 年齡
+      responses:
+        500:
+          description: Internal Server Error.
+        200:
+          description: Response status
+          schema:     
+            properties:
+              httpstatus:
+                type: integer
+                description: httpstatus
+              message:
+                type: string
+                description: status

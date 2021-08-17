@@ -1,0 +1,30 @@
+Create user
+---
+tags:
+  - Post
+produces: application/json
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      required:
+        - name
+        - age
+      properties:
+        name:
+          type: string
+          description: 名字
+        age:
+          type: integer
+          description: 年齡
+responses:
+  500:
+    description: Internal Server Error.
+  200:
+    description: Response status
+    schema:
+      properties:
+        response:
+          type: string
+          description: response

@@ -1,0 +1,21 @@
+Returns a list of user
+---
+tags:
+  - Get
+produces: application/json
+responses:
+  500:
+    description: Internal Server Error.
+  200:
+    description: Retrieve users list
+    schema:
+      properties:
+        id:
+          type: integer
+          description: serial
+        name:
+          type: string
+          description: 名字
+        age:
+          type: integer
+          description: 年齡

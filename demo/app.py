@@ -5,6 +5,8 @@ from api.users import users
 from models.sqlmodel import execSql, create_tables
 from flasgger import Swagger
 
+# demo\Scripts\activate 啟用虛擬環境
+# deactivate 停止虛擬環境
 swagger_template = {
     "title": "FlaskAPI",
     "description": "Demo",

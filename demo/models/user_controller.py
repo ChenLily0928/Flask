@@ -68,7 +68,6 @@ def querySqlCmd(query, args):
             result = cursor.fetchall()
             return result
         except AssertionError as err:
-            print(err)
             db.close()
             return err
 

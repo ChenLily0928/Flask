@@ -38,6 +38,28 @@ def get_user_by_id(id):
     return jsonify(result)
 
 
+@users.route("/calculate", methods=["GET"])
+@swag_from("caculate.yml")
+def caculate_users_info():
+    users = user_controller.get_users()
+    # min, max, average
+    result = []
+    for obj in users:
+        dct = dict(zip(["id", "name", "age"], obj))
+        result.append(dct)
+    result = sorted(result, key=lambda k: k["id"])
+    minAge = min(result, key=lambda x: x["age"])
+    maxAge = max(result, key=lambda x: x["age"])
+    averageAge = sum(value["age"] for value in result) / len(result)
+
+    response = {
+        "min": minAge.get("age"),
+        "max": maxAge.get("age"),
+        "average": "%.4f" % averageAge,
+    }
+    return jsonify(response)
+
+
 @users.route("/users/<int:id>", methods=["PUT"])
 @swag_from("updatebyid.yml")
 def update_user(id):
@@ -60,15 +82,14 @@ def delete_user(id):
 def batch_import_users():
     file = request.files["file"]
     if not file:
-        return "No file"
+        return jsonify("No file")
 
     csv_input = pd.read_csv(file, header=0)
     data = pd.DataFrame(csv_input, columns=["Name", "Age"])
-    print(type(data))
-    result = user_controller.bulk_insert_user(csv_input)
+    result = user_controller.bulk_insert_user(data)
 
     if result:
         response = "success"
     else:
         response = "fail"
-    return response
+    return jsonify(response)

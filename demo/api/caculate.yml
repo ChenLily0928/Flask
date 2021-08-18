@@ -1,0 +1,21 @@
+Caculate user info
+---
+tags:
+  - Get
+produces: application/json
+responses:
+  500:
+    description: Internal Server Error.
+  200:
+    description: Caculate user info
+    schema:
+      properties:
+        min:
+          type: integer
+          description: 最小年齡
+        max:
+          type: integer
+          description: 最大年齡
+        average:
+          type: integer
+          description: 平均年齡
